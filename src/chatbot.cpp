@@ -46,7 +46,7 @@ ChatBot::~ChatBot()
 ////
     ChatBot::ChatBot(const ChatBot &source)
     {
-        std::cout << "ChatBot copy constructor " << std::endl;
+        std::cout << "ChatBot Copy Constructor " << std::endl;
 
         _image = source._image;
         _currentNode = source._currentNode;
@@ -56,7 +56,7 @@ ChatBot::~ChatBot()
     
     ChatBot &ChatBot::operator=(const ChatBot &source)
     {
-        std::cout << "ChatBot assignment operator " << std::endl;
+        std::cout << "ChatBot Assignment Operator " << std::endl;
         
         _image = source._image;
         _currentNode = source._currentNode;
@@ -68,22 +68,36 @@ ChatBot::~ChatBot()
 
     ChatBot::ChatBot(ChatBot&& source)
     {
-        std::cout << "ChatBot move constructor " << std::endl;
+        std::cout << "ChatBot Move Constructor " << std::endl;
 
+  	    std::cout << source._image << std::endl;
         _image = source._image;
+  	    std::cout << _image << std::endl;
+      	source._image = NULL;
+  	    std::cout << source._image << std::endl;
         _currentNode = source._currentNode;
+      	source._currentNode = NULL;
         _rootNode = source._rootNode;
+      	source._rootNode = NULL;
         _chatLogic = source._chatLogic;
+      	source._chatLogic = NULL;
     }
 
-    ChatBot &ChatBot::operator=(const ChatBot &&source)
+    ChatBot &ChatBot::operator=(ChatBot &&source)
     {
-        std::cout << "move assignment operator " << std::endl;
+        std::cout << "ChatBot Move Assignment Operator " << std::endl;
 
+  	    std::cout << source._image << std::endl;
         _image = source._image;
+  	    std::cout << _image << std::endl;
+      	source._image = NULL;
+  	    std::cout << source._image << std::endl;
         _currentNode = source._currentNode;
+      	source._currentNode = NULL;
         _rootNode = source._rootNode;
+      	source._rootNode = NULL;
         _chatLogic = source._chatLogic;
+      	source._chatLogic = NULL;
 
         return *this;
     }
