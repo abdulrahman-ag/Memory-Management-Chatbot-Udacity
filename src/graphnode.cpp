@@ -35,13 +35,13 @@ void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 void GraphNode::MoveChatbotHere(ChatBot chatbot)
 {
     *_chatBot = std::move(chatbot);
-  	std::cout << "moved via assignment" << std::endl;
     _chatBot->SetCurrentNode(this);
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
-    newNode->MoveChatbotHere(*_chatBot);
+    ChatBot chatBot = ChatBot("../images/chatbot.png");
+    newNode->MoveChatbotHere(std::move(chatBot));
 }
 ////
 //// EOF STUDENT CODE

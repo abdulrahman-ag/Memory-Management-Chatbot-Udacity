@@ -48,8 +48,12 @@ ChatBot::~ChatBot()
     {
         std::cout << "ChatBot Copy Constructor " << std::endl;
 
+      	if(_image != nullptr)
+        {
+          	delete _image;
+        }
         _image = new wxBitmap();
-		*_image = *source._image;
+		_image = source._image;
       
         _chatLogic = source._chatLogic;
       	_chatLogic->SetChatbotHandle(this);
@@ -69,7 +73,7 @@ ChatBot::~ChatBot()
               	delete _image;
             }
             _image = new wxBitmap(); 
-            *_image = *source._image;
+            _image = source._image;
 
             _chatLogic = source._chatLogic;
             _chatLogic->SetChatbotHandle(this);
@@ -83,7 +87,12 @@ ChatBot::~ChatBot()
     ChatBot::ChatBot(ChatBot&& source)
     {
         std::cout << "ChatBot Move Constructor " << std::endl;
-
+      
+		if(_image != nullptr)
+        {
+          	delete _image;
+        }
+        _image = new wxBitmap(); 
         _image = source._image;
       
         _chatLogic = source._chatLogic;
