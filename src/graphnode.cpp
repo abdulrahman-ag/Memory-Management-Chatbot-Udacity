@@ -1,5 +1,9 @@
+
+#include <iostream>
 #include "graphedge.h"
 #include "graphnode.h"
+#include "chatlogic.h"
+#include <memory>
 
 GraphNode::GraphNode(int id)
 {
@@ -34,14 +38,14 @@ void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 ////
 void GraphNode::MoveChatbotHere(ChatBot chatbot)
 {
-    *_chatBot = std::move(chatbot);
-    _chatBot->SetCurrentNode(this);
+    _chatBot = std::move(chatbot);
+    _chatBot.GetChatLogicHandle()->SetChatbotHandle(&_chatBot);
+    _chatBot.SetCurrentNode(this);
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
-    ChatBot chatBot = ChatBot("../images/chatbot.png");
-    newNode->MoveChatbotHere(std::move(chatBot));
+    newNode->MoveChatbotHere(std::move(_chatBot));
 }
 ////
 //// EOF STUDENT CODE
